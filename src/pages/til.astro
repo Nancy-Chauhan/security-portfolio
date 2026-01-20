@@ -4,52 +4,39 @@ import Layout from '../layouts/Layout.astro';
 // TIL - Today I Learned entries
 const entries = [
   {
-    title: "Burp Suite's Turbo Intruder for high-speed fuzzing",
+    title: "Information disclosure in error messages",
+    date: "2026-01-19",
+    content: "Verbose error messages can leak framework versions, stack traces, and database details. Always check error responses for version numbers that could reveal known vulnerabilities.",
+    tags: ["PortSwigger", "Info Disclosure"],
+    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-error-messages"
+  },
+  {
+    title: "Debug pages expose sensitive environment variables",
+    date: "2026-01-19",
+    content: "Debug endpoints like /cgi-bin/phpinfo.php can expose SECRET_KEY, database credentials, and internal paths. Look for HTML comments linking to debug pages and check robots.txt.",
+    tags: ["PortSwigger", "Info Disclosure"],
+    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-on-debug-page"
+  },
+  {
+    title: "Source code disclosure via backup files",
     date: "2026-01-18",
-    content: "Turbo Intruder uses HTTP pipelining to send requests much faster than standard Intruder. Great for race condition testing and high-volume parameter fuzzing.",
-    tags: ["Burp Suite", "Fuzzing"]
+    content: "Backup files (.bak, .old, ~) in hidden directories can expose hardcoded credentials. Check robots.txt for /backup directories and look for files like ProductTemplate.java.bak.",
+    tags: ["PortSwigger", "Info Disclosure"],
+    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-via-backup-files"
   },
   {
-    title: "STRIDE threat categories aren't mutually exclusive",
-    date: "2026-01-14",
-    content: "A single vulnerability can map to multiple STRIDE categories. An auth bypass (Spoofing) might also enable Elevation of Privilege. Consider all applicable categories when threat modeling.",
-    tags: ["Threat Modeling", "STRIDE"]
+    title: "TRACE method reveals custom headers",
+    date: "2026-01-18",
+    content: "Using HTTP TRACE method can reveal custom headers added by proxies/load balancers like X-Custom-IP-Authorization. These headers can be spoofed to bypass IP-based authentication.",
+    tags: ["PortSwigger", "Info Disclosure"],
+    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass"
   },
   {
-    title: "JWT 'none' algorithm attack still works in 2026",
-    date: "2026-01-10",
-    content: "Some libraries still accept alg:none if not explicitly blocked. Always validate the algorithm server-side and reject unsigned tokens.",
-    tags: ["JWT", "Authentication"]
-  },
-  {
-    title: "Using ffuf for content discovery with custom wordlists",
-    date: "2026-01-05",
-    content: "Combining SecLists with app-specific wordlists dramatically improves discovery. Use -mc to filter status codes and -fs to filter by response size.",
-    tags: ["ffuf", "Recon"]
-  },
-  {
-    title: "GraphQL introspection as an attack surface",
-    date: "2025-12-28",
-    content: "Introspection queries expose the entire schema. Even if disabled in production, fragments of the schema may leak through error messages or autocomplete.",
-    tags: ["GraphQL", "API Security"]
-  },
-  {
-    title: "CORS misconfiguration patterns",
-    date: "2025-12-20",
-    content: "Reflecting Origin header without validation, allowing null origin, or trusting subdomains—each creates different attack scenarios. Test all three.",
-    tags: ["CORS", "Web Security"]
-  },
-  {
-    title: "Host header injection for password reset poisoning",
-    date: "2025-12-15",
-    content: "If the app uses the Host header to build reset links, an attacker can poison them to point to their server and capture tokens.",
-    tags: ["Headers", "Account Takeover"]
-  },
-  {
-    title: "Kubernetes RBAC least privilege is harder than it looks",
-    date: "2025-12-08",
-    content: "Wildcards in RBAC rules are dangerous. A rule allowing get on secrets/* in a namespace exposes all secrets. Be explicit about resource names when possible.",
-    tags: ["Kubernetes", "RBAC"]
+    title: "Version control folders leak source code",
+    date: "2026-01-18",
+    content: "Exposed .git directories allow full repository reconstruction. Use tools like git-dumper to extract source code, commit history, and potentially sensitive configs from /.git/.",
+    tags: ["PortSwigger", "Info Disclosure"],
+    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history"
   }
 ];
 ---
@@ -58,7 +45,7 @@ const entries = [
   <div class="container">
     <header class="page-header">
       <h1 class="page-title">Today I Learned</h1>
-      <p class="page-subtitle">Quick notes, findings, and security learnings</p>
+      <p class="page-subtitle">Quick notes from <a href="https://portswigger.net/web-security/all-labs#information-disclosure" target="_blank" rel="noopener" style="color: var(--accent);">PortSwigger Web Security Academy</a></p>
     </header>
 
     <section class="til-list">
@@ -72,7 +59,13 @@ const entries = [
               ))}
             </div>
           </div>
-          <h2 class="til-title">{entry.title}</h2>
+          <h2 class="til-title">
+            {entry.labUrl ? (
+              <a href={entry.labUrl} target="_blank" rel="noopener">{entry.title}</a>
+            ) : (
+              entry.title
+            )}
+          </h2>
           <p class="til-content">{entry.content}</p>
         </article>
       ))}
@@ -131,6 +124,14 @@ const entries = [
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
+  }
+
+  .til-title a {
+    color: var(--text-primary);
+  }
+
+  .til-title a:hover {
+    color: var(--accent);
   }
 
   .til-content {

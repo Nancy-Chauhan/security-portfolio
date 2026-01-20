@@ -25,6 +25,7 @@ const projects = [
 const talks = [
   {
     title: "Automate Once, Run Anywhere: The Docker Moment for Security Workflows",
+    url: "https://kccnceu2026.sched.com/event/2CW1E",
     event: "KubeCon + CloudNativeCon Europe 2026",
     date: "March 25, 2026",
     location: "Amsterdam, Netherlands",
@@ -91,7 +92,14 @@ const talks = [
       {talks.map((talk) => (
         <article class="project-card">
           <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
-            <h3 class="project-title" style="margin-bottom: 0;">{talk.title}</h3>
+            <h3 class="project-title" style="margin-bottom: 0;">
+              <a href={talk.url} target="_blank" rel="noopener">
+                {talk.title}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </a>
+            </h3>
             {talk.upcoming && <span class="tag" style="background: rgba(34, 197, 94, 0.2);">Upcoming</span>}
           </div>
           <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0;">

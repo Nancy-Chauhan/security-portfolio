@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    title: "LLM-Powered Threat Modeling",
+    description: "A self-serve threat modeling platform that uses LLMs to analyze system designs and generate comprehensive security threat assessments using the STRIDE methodology. Import JIRA tickets, upload PRDs and architecture diagrams, and get actionable remediation steps with priority and effort estimates.",
+    url: "https://github.com/Nancy-Chauhan/llm-powered-threat-modelling",
+    tags: ["React", "TypeScript", "Vite", "OpenAI", "Claude", "PostgreSQL", "Hono", "Drizzle ORM"],
+    features: [
+      "STRIDE-based threat categorization",
+      "Risk scoring with likelihood × impact",
+      "JIRA integration for context",
+      "Export to Markdown and JSON"
+    ]
+  },
+  {
+    title: "Info Disclosure Scanner",
+    description: "AI-powered security scanner that detects sensitive information leakage in web applications using Claude AI. Scans 50+ risky paths, checks security headers, analyzes JavaScript files, and categorizes findings by severity.",
+    url: "https://github.com/Nancy-Chauhan/info-disclosure-scanner",
+    tags: ["Python", "Claude AI", "ffuf", "Docker", "Security Scanner"],
+    features: [
+      "50+ risky path checks",
+      "Security header analysis",
+      "Severity categorization (High/Medium/Low)",
+      "HTML and Markdown reports"
+    ]
+  },
+  {
+    title: "AttackTree",
+    description: "AI-powered threat modeling application that automatically generates comprehensive attack trees based on attacker objectives. Includes 6 pre-built scenarios covering credential theft, authorization bypass, financial fraud, DoS, and more.",
+    url: "https://github.com/Nancy-Chauhan/attacktree-app",
+    tags: ["Python", "FastAPI", "Groq", "Llama 3.1", "Docker"],
+    features: [
+      "AI-generated attack trees",
+      "Defense recommendations",
+      "OWASP Top 10 mapping",
+      "Export to Markdown and JSON"
+    ]
+  }
+];
+---
+
+<Layout title="Projects | Nancy Chauhan">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">Projects</h1>
+      <p class="page-subtitle">Security tools and research projects I've built</p>
+    </header>
+
+    <section class="project-grid" style="gap: 2rem;">
+      {projects.map((project) => (
+        <article class="project-card" style="padding: 2rem;">
+          <h2 class="project-title" style="font-size: 1.5rem; margin-bottom: 1rem;">
+            <a href={project.url} target="_blank" rel="noopener">
+              {project.title}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+              </svg>
+            </a>
+          </h2>
+          <p class="project-description" style="font-size: 1rem; margin-bottom: 1.5rem;">{project.description}</p>
+
+          <h3 style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;">Key Features</h3>
+          <ul style="list-style: none; margin-bottom: 1.5rem;">
+            {project.features.map((feature) => (
+              <li style="color: var(--text-secondary); font-size: 0.9rem; padding: 0.25rem 0; padding-left: 1rem; position: relative;">
+                <span style="position: absolute; left: 0; color: var(--accent);">›</span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <div class="project-tags">
+            {project.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </section>
+  </div>
+</Layout>

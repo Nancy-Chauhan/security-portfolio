@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    title: "LLM-Powered Threat Modeling",
+    description: "Self-serve threat modeling platform using LLMs to analyze system designs and generate STRIDE-based security assessments with actionable remediation steps.",
+    url: "https://github.com/Nancy-Chauhan/llm-powered-threat-modelling",
+    tags: ["React", "TypeScript", "OpenAI", "Claude", "PostgreSQL"]
+  },
+  {
+    title: "Info Disclosure Scanner",
+    description: "AI-powered security scanner that detects sensitive information leakage in web applications using Claude AI. Checks 50+ risky paths and security headers.",
+    url: "https://github.com/Nancy-Chauhan/info-disclosure-scanner",
+    tags: ["Python", "Claude AI", "Security Scanner"]
+  },
+  {
+    title: "AttackTree",
+    description: "AI-powered threat modeling app that generates comprehensive attack trees based on attacker objectives with defense recommendations and OWASP Top 10 mapping.",
+    url: "https://github.com/Nancy-Chauhan/attacktree-app",
+    tags: ["Python", "FastAPI", "Groq", "Llama"]
+  }
+];
+
+const talks = [
+  {
+    title: "Automate Once, Run Anywhere: The Docker Moment for Security Workflows",
+    event: "KubeCon + CloudNativeCon Europe 2026",
+    date: "March 25, 2026",
+    location: "Amsterdam, Netherlands",
+    description: "Making security automation portable, reproducible, and Kubernetes-native using open, declarative workflow definitions.",
+    upcoming: true
+  }
+];
+
+---
+
+<Layout title="Nancy Chauhan | Security Engineer">
+  <div class="container">
+    <section class="hero">
+      <p class="hero-subtitle">Security Engineer</p>
+      <h1 class="hero-title">Breaking systems to build them better</h1>
+      <div class="hero-description">
+        <p>
+          I enjoy breaking down systems to understand how they fail and using that understanding to help teams build more secure and reliable products. My background is in DevOps and cloud native systems, and over time my interests have shifted toward product security, application security, and threat modeling.
+        </p>
+        <p>
+          I've been building depth in application security through hands-on learning—working through real-world web vulnerability classes like authentication issues, IDORs, injections, business logic flaws, and OWASP Top 10 risks. I reason about vulnerabilities from an attacker's perspective while keeping mitigations practical and developer-friendly.
+        </p>
+        <p>
+          More recently, I've been exploring how AI can support security work, especially in accelerating manual processes like threat modeling and design reviews, while keeping humans in the loop for judgment and accountability.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="project-grid">
+        {projects.map((project) => (
+          <article class="project-card">
+            <h3 class="project-title">
+              <a href={project.url} target="_blank" rel="noopener">
+                {project.title}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </a>
+            </h3>
+            <p class="project-description">{project.description}</p>
+            <div class="project-tags">
+              {project.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+      <p style="margin-top: 2rem;">
+        <a href="/projects" class="link-arrow">View all projects</a>
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Speaking</h2>
+      {talks.map((talk) => (
+        <article class="project-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+            <h3 class="project-title" style="margin-bottom: 0;">{talk.title}</h3>
+            {talk.upcoming && <span class="tag" style="background: rgba(34, 197, 94, 0.2);">Upcoming</span>}
+          </div>
+          <p style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin: 0.5rem 0;">
+            {talk.event} · {talk.date} · {talk.location}
+          </p>
+          <p class="project-description">{talk.description}</p>
+        </article>
+      ))}
+      <p style="margin-top: 1.5rem;">
+        <a href="/videos" class="link-arrow">Watch past talks</a>
+      </p>
+    </section>
+
+  </div>
+</Layout>

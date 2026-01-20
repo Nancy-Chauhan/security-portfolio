@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// TIL - Today I Learned entries
+const entries = [
+  {
+    title: "Burp Suite's Turbo Intruder for high-speed fuzzing",
+    date: "2026-01-18",
+    content: "Turbo Intruder uses HTTP pipelining to send requests much faster than standard Intruder. Great for race condition testing and high-volume parameter fuzzing.",
+    tags: ["Burp Suite", "Fuzzing"]
+  },
+  {
+    title: "STRIDE threat categories aren't mutually exclusive",
+    date: "2026-01-14",
+    content: "A single vulnerability can map to multiple STRIDE categories. An auth bypass (Spoofing) might also enable Elevation of Privilege. Consider all applicable categories when threat modeling.",
+    tags: ["Threat Modeling", "STRIDE"]
+  },
+  {
+    title: "JWT 'none' algorithm attack still works in 2026",
+    date: "2026-01-10",
+    content: "Some libraries still accept alg:none if not explicitly blocked. Always validate the algorithm server-side and reject unsigned tokens.",
+    tags: ["JWT", "Authentication"]
+  },
+  {
+    title: "Using ffuf for content discovery with custom wordlists",
+    date: "2026-01-05",
+    content: "Combining SecLists with app-specific wordlists dramatically improves discovery. Use -mc to filter status codes and -fs to filter by response size.",
+    tags: ["ffuf", "Recon"]
+  },
+  {
+    title: "GraphQL introspection as an attack surface",
+    date: "2025-12-28",
+    content: "Introspection queries expose the entire schema. Even if disabled in production, fragments of the schema may leak through error messages or autocomplete.",
+    tags: ["GraphQL", "API Security"]
+  },
+  {
+    title: "CORS misconfiguration patterns",
+    date: "2025-12-20",
+    content: "Reflecting Origin header without validation, allowing null origin, or trusting subdomains—each creates different attack scenarios. Test all three.",
+    tags: ["CORS", "Web Security"]
+  },
+  {
+    title: "Host header injection for password reset poisoning",
+    date: "2025-12-15",
+    content: "If the app uses the Host header to build reset links, an attacker can poison them to point to their server and capture tokens.",
+    tags: ["Headers", "Account Takeover"]
+  },
+  {
+    title: "Kubernetes RBAC least privilege is harder than it looks",
+    date: "2025-12-08",
+    content: "Wildcards in RBAC rules are dangerous. A rule allowing get on secrets/* in a namespace exposes all secrets. Be explicit about resource names when possible.",
+    tags: ["Kubernetes", "RBAC"]
+  }
+];
+---
+
+<Layout title="TIL | Nancy Chauhan">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">Today I Learned</h1>
+      <p class="page-subtitle">Quick notes, findings, and security learnings</p>
+    </header>
+
+    <section class="til-list">
+      {entries.map((entry) => (
+        <article class="til-entry">
+          <div class="til-header">
+            <span class="til-date">{entry.date}</span>
+            <div class="til-tags">
+              {entry.tags.map((tag) => (
+                <span class="til-tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <h2 class="til-title">{entry.title}</h2>
+          <p class="til-content">{entry.content}</p>
+        </article>
+      ))}
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .til-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .til-entry {
+    background: var(--bg-primary);
+    padding: 1.5rem 0;
+  }
+
+  .til-entry:first-child {
+    padding-top: 0;
+  }
+
+  .til-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .til-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+  }
+
+  .til-tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .til-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    background: var(--bg-tertiary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+  }
+
+  .til-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .til-content {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+</style>

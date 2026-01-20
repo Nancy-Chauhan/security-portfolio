@@ -8,35 +8,65 @@ const entries = [
     date: "2026-01-19",
     content: "Verbose error messages can leak framework versions, stack traces, and database details. Always check error responses for version numbers that could reveal known vulnerabilities.",
     tags: ["PortSwigger", "Info Disclosure"],
-    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-error-messages"
+    url: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-error-messages"
   },
   {
     title: "Debug pages expose sensitive environment variables",
     date: "2026-01-19",
     content: "Debug endpoints like /cgi-bin/phpinfo.php can expose SECRET_KEY, database credentials, and internal paths. Look for HTML comments linking to debug pages and check robots.txt.",
     tags: ["PortSwigger", "Info Disclosure"],
-    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-on-debug-page"
+    url: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-on-debug-page"
   },
   {
     title: "Source code disclosure via backup files",
     date: "2026-01-18",
     content: "Backup files (.bak, .old, ~) in hidden directories can expose hardcoded credentials. Check robots.txt for /backup directories and look for files like ProductTemplate.java.bak.",
     tags: ["PortSwigger", "Info Disclosure"],
-    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-via-backup-files"
+    url: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-via-backup-files"
   },
   {
     title: "TRACE method reveals custom headers",
     date: "2026-01-18",
     content: "Using HTTP TRACE method can reveal custom headers added by proxies/load balancers like X-Custom-IP-Authorization. These headers can be spoofed to bypass IP-based authentication.",
     tags: ["PortSwigger", "Info Disclosure"],
-    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass"
+    url: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass"
   },
   {
     title: "Version control folders leak source code",
     date: "2026-01-18",
     content: "Exposed .git directories allow full repository reconstruction. Use tools like git-dumper to extract source code, commit history, and potentially sensitive configs from /.git/.",
     tags: ["PortSwigger", "Info Disclosure"],
-    labUrl: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history"
+    url: "https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-in-version-control-history"
+  },
+  {
+    title: "Kubernetes RBAC wildcards are dangerous",
+    date: "2026-01-15",
+    content: "A rule allowing get on secrets/* in a namespace exposes all secrets. Wildcards in RBAC rules can grant unintended access. Be explicit about resource names when possible.",
+    tags: ["Kubernetes", "RBAC"]
+  },
+  {
+    title: "Container images inherit vulnerabilities",
+    date: "2026-01-12",
+    content: "Base images like ubuntu:latest can have hundreds of CVEs. Use distroless or alpine images, pin versions, and scan with Trivy or Grype in CI/CD pipelines.",
+    tags: ["Containers", "DevSecOps"]
+  },
+  {
+    title: "Secrets in CI/CD environment variables",
+    date: "2026-01-10",
+    content: "Environment variables in CI/CD logs can leak secrets. Use secret masking, avoid printing env vars in debug output, and prefer secret management tools over plain env vars.",
+    tags: ["CI/CD", "Secrets"]
+  },
+  {
+    title: "Pod security context prevents privilege escalation",
+    date: "2026-01-08",
+    content: "Setting runAsNonRoot: true, readOnlyRootFilesystem: true, and allowPrivilegeEscalation: false in pod security context blocks common container escape vectors.",
+    tags: ["Kubernetes", "Hardening"]
+  },
+  {
+    title: "AWS IMDS v1 allows SSRF to steal credentials",
+    date: "2026-01-05",
+    content: "Instance Metadata Service v1 at 169.254.169.254 can be accessed via SSRF to steal IAM credentials. Enforce IMDSv2 which requires session tokens and PUT requests.",
+    tags: ["AWS", "Cloud Security"]
   }
 ];
 ---
@@ -45,7 +75,7 @@ const entries = [
   <div class="container">
     <header class="page-header">
       <h1 class="page-title">Today I Learned</h1>
-      <p class="page-subtitle">Quick notes from <a href="https://portswigger.net/web-security/all-labs#information-disclosure" target="_blank" rel="noopener" style="color: var(--accent);">PortSwigger Web Security Academy</a></p>
+      <p class="page-subtitle">Security learnings from <a href="https://portswigger.net/web-security/all-labs" target="_blank" rel="noopener" style="color: var(--accent);">PortSwigger</a>, infrastructure hardening, and cloud security</p>
     </header>
 
     <section class="til-list">
@@ -60,8 +90,8 @@ const entries = [
             </div>
           </div>
           <h2 class="til-title">
-            {entry.labUrl ? (
-              <a href={entry.labUrl} target="_blank" rel="noopener">{entry.title}</a>
+            {entry.url ? (
+              <a href={entry.url} target="_blank" rel="noopener">{entry.title}</a>
             ) : (
               entry.title
             )}

@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const videos = [
+const talks = [
   {
     title: "Conference Talk",
     description: "Security and DevOps presentation",
@@ -22,54 +22,77 @@ const videos = [
   }
 ];
 
-// Example Loom videos - add your own
-const loomVideos = [
-  // {
-  //   title: "Threat Modeling Demo",
-  //   description: "Walkthrough of the LLM-powered threat modeling tool",
-  //   loomId: "your-loom-id-here",
-  //   type: "loom"
-  // }
+const playlists = [
+  {
+    title: "LocalStack 101",
+    description: "Beginner onboarding to LocalStack fundamentals. Learn to emulate AWS services locally—S3, Lambda, DynamoDB, and more—for faster cloud development.",
+    playlistId: "PLTew28KOwGxPqbkFiW518eeIfiV495bm0",
+    tags: ["AWS", "LocalStack", "Cloud Development"]
+  },
+  {
+    title: "Development & Deployment with LocalStack",
+    description: "Intermediate workflows for cloud-native apps. Full dev cycles, CI/CD integration, and testing patterns using LocalStack to simulate AWS locally.",
+    playlistId: "PLTew28KOwGxPdtdW00WNXZLZnstvRQyTF",
+    tags: ["DevOps", "CI/CD", "AWS"]
+  }
 ];
-
-const allVideos = [...videos, ...loomVideos];
 ---
 
 <Layout title="Videos | Nancy Chauhan">
   <div class="container">
     <header class="page-header">
       <h1 class="page-title">Videos</h1>
-      <p class="page-subtitle">Conference talks, demos, and walkthroughs</p>
+      <p class="page-subtitle">Conference talks, tutorials, and walkthroughs</p>
     </header>
 
-    <section class="video-grid">
-      {allVideos.map((video) => (
-        <article class="video-card">
-          <div class="video-embed">
-            {video.type === 'youtube' ? (
+    <section>
+      <h2 class="section-title">Talks</h2>
+      <div class="video-grid">
+        {talks.map((video) => (
+          <article class="video-card">
+            <div class="video-embed">
               <iframe
                 src={`https://www.youtube.com/embed/${video.youtubeId}`}
                 title={video.title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
               />
-            ) : (
-              <iframe
-                src={`https://www.loom.com/embed/${video.loomId}`}
-                title={video.title}
-                allowfullscreen
-              />
-            )}
-          </div>
-          <div class="video-info">
-            <h2 class="video-title">{video.title}</h2>
-            <p class="video-description">{video.description}</p>
-          </div>
-        </article>
-      ))}
+            </div>
+            <div class="video-info">
+              <h3 class="video-title">{video.title}</h3>
+              <p class="video-description">{video.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
 
-    <section class="section" style="border-top: none; padding-top: 2rem;">
+    <section class="section">
+      <h2 class="section-title">LocalStack Academy</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Video courses I created for cloud engineers to learn AWS development with LocalStack.</p>
+      <div class="project-grid">
+        {playlists.map((playlist) => (
+          <article class="project-card">
+            <h3 class="project-title">
+              <a href={`https://www.youtube.com/playlist?list=${playlist.playlistId}`} target="_blank" rel="noopener">
+                {playlist.title}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                </svg>
+              </a>
+            </h3>
+            <p class="project-description">{playlist.description}</p>
+            <div class="project-tags">
+              {playlist.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
       <h2 class="section-title">Upcoming Talk</h2>
       <article class="project-card">
         <h3 class="project-title">

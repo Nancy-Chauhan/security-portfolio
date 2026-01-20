@@ -313,6 +313,7 @@ code, pre {
   border-radius: 8px;
   padding: 1.5rem;
   transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .project-card:hover {

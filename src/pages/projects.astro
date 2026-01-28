@@ -3,6 +3,18 @@ import Layout from '../layouts/Layout.astro';
 
 const projects = [
   {
+    title: "SecLoop",
+    description: "Autonomous security scanner & auto-fixer powered by LLM loops. Scans for CVEs in dependencies, secrets, and SAST vulnerabilities across Python, Node.js, Go, Rust, and Ruby ecosystems. Auto-fixes issues using an iterative scan-fix-test loop until clean.",
+    url: "https://github.com/Nancy-Chauhan/secloop",
+    tags: ["Python", "Claude AI", "pip-audit", "semgrep", "gitleaks", "Security Scanner"],
+    features: [
+      "Dependency CVE scanning (pip-audit, npm audit, cargo-audit)",
+      "Secret detection with gitleaks",
+      "SAST analysis with semgrep and bandit",
+      "LLM-powered auto-fix with iterative verification"
+    ]
+  },
+  {
     title: "LLM-Powered Threat Modeling",
     description: "A self-serve threat modeling platform that uses LLMs to analyze system designs and generate comprehensive security threat assessments using the STRIDE methodology. Import JIRA tickets, upload PRDs and architecture diagrams, and get actionable remediation steps with priority and effort estimates.",
     url: "https://github.com/Nancy-Chauhan/llm-powered-threat-modelling",

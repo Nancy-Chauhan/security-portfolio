@@ -4,6 +4,41 @@ import Layout from '../layouts/Layout.astro';
 // TIL - Today I Learned entries
 const entries = [
   {
+    title: "Found CVE-2025-68428 in Apache Superset using SecLoop",
+    date: "2026-01-28",
+    content: "Ran SecLoop on Apache Superset and discovered a critical jsPDF vulnerability (CVE-2025-68428) - a Local File Inclusion/Path Traversal that allows arbitrary file reads in Node.js environments. Raised a PR to update jspdf from 3.x to 4.0.0 which fixes the vulnerable file system access.",
+    tags: ["SecLoop", "CVE", "Open Source"],
+    url: "https://github.com/apache/superset/pull/37533"
+  },
+  {
+    title: "Username enumeration via different responses",
+    date: "2026-01-21",
+    content: "Login forms can leak valid usernames through response differences. By comparing responses for valid vs invalid usernames (different error messages, response length, timing), attackers can enumerate users before brute-forcing passwords.",
+    tags: ["PortSwigger", "Authentication", "Burp Suite"],
+    url: "https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses"
+  },
+  {
+    title: "2FA simple bypass",
+    date: "2026-01-21",
+    content: "Some 2FA implementations only check if you've completed step 1, not if 2FA was verified. After logging in with credentials, directly navigating to /my-account can bypass the 2FA check entirely if session state isn't properly validated.",
+    tags: ["PortSwigger", "Authentication", "Burp Suite"],
+    url: "https://portswigger.net/web-security/authentication/multi-factor/lab-2fa-simple-bypass"
+  },
+  {
+    title: "Password reset broken logic",
+    date: "2026-01-21",
+    content: "Password reset flows can be exploited if the token/username isn't properly tied to the session. By manipulating the username parameter in the reset request while using a valid token, you can reset another user's password.",
+    tags: ["PortSwigger", "Authentication", "Burp Suite"],
+    url: "https://portswigger.net/web-security/authentication/other-mechanisms/lab-password-reset-broken-logic"
+  },
+  {
+    title: "Username enumeration via subtly different responses",
+    date: "2026-01-21",
+    content: "Even subtle response differences reveal valid usernames. A period vs no period in error messages, slight HTML changes, or timing variations can be detected using Burp Intruder's grep match feature to find valid accounts.",
+    tags: ["PortSwigger", "Authentication", "Burp Suite"],
+    url: "https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses"
+  },
+  {
     title: "Information disclosure in error messages",
     date: "2026-01-19",
     content: "Verbose error messages can leak framework versions, stack traces, and database details. Always check error responses for version numbers that could reveal known vulnerabilities.",

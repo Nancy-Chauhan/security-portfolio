@@ -3,6 +3,12 @@ import Layout from '../layouts/Layout.astro';
 
 const projects = [
   {
+    title: "SecLoop",
+    description: "Autonomous security scanner & auto-fixer powered by LLM loops. Found CVE-2025-68428 in Apache Superset. Scans for CVEs, secrets, and SAST vulnerabilities with iterative auto-fix.",
+    url: "https://github.com/Nancy-Chauhan/secloop",
+    tags: ["Python", "Claude AI", "pip-audit", "semgrep", "gitleaks"]
+  },
+  {
     title: "LLM-Powered Threat Modeling",
     description: "Self-serve threat modeling platform using LLMs to analyze system designs and generate STRIDE-based security assessments with actionable remediation steps.",
     url: "https://github.com/Nancy-Chauhan/llm-powered-threat-modelling",
@@ -13,12 +19,6 @@ const projects = [
     description: "AI-powered security scanner that detects sensitive information leakage in web applications using Claude AI. Checks 50+ risky paths and security headers.",
     url: "https://github.com/Nancy-Chauhan/info-disclosure-scanner",
     tags: ["Python", "Claude AI", "Security Scanner"]
-  },
-  {
-    title: "AttackTree",
-    description: "AI-powered threat modeling app that generates comprehensive attack trees based on attacker objectives with defense recommendations and OWASP Top 10 mapping.",
-    url: "https://github.com/Nancy-Chauhan/attacktree-app",
-    tags: ["Python", "FastAPI", "Groq", "Llama"]
   }
 ];
 
